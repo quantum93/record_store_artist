@@ -1,7 +1,4 @@
-require 'rspec'
-require 'album'
-require 'song'
-require 'pry'
+require 'spec_helper'
 
 describe '#Album' do
 
