@@ -25,7 +25,8 @@ end
 post ('/albums') do
   name = params[:album_name]
   release_year = params[:release_year].to_i
-  album = Album.new({:name => name, :id => nil, :release_year => release_year})
+  price = params[:price].to_i
+  album = Album.new({:name => name, :id => nil, :release_year => release_year, :price => price})
   album.save()
   redirect to('/albums')
 end
