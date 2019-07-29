@@ -6,9 +6,10 @@ require('pry')
 require("pg")
 also_reload('lib/**/*.rb')
 
-DB = PG.connect({:dbname => "record_store"})
+DB = PG.connect({:dbname => "record_store_test"})
 
 get('/') do
+  Album.clear()
   redirect to('/albums')
 end
 
@@ -23,7 +24,8 @@ end
 
 post ('/albums') do
   name = params[:album_name]
-  album = Album.new({:name => name, :id => nil})
+  release_year = params[:release_year].to_i
+  album = Album.new({:name => name, :id => nil, :release_year => release_year})
   album.save()
   redirect to('/albums')
 end
