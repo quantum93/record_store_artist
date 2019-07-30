@@ -1,0 +1,28 @@
+<h2>Artist Name: <%= @artist.name %></h2>
+
+<h3>Artist albums</h3>
+  <% if @artist.albums.any? %>
+    <ul>
+      <% @artist.albums.each do |album| %>
+        <li><a href="/albums/<%= album.id %>"><%= album.name %></a></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>There are no albums listed for this artist yet.</p>
+  <% end %>
+
+<h4>Add a album:</h4>
+
+<form action="/artists/<%= @artist.id %>/albums" method="post">
+  <div class="form-group">
+    <label for="album_name">Album name</label>
+    <input id="album_name" name="album_name" class="form-control" type="text">
+  </div>
+  <button type="submit" class="btn">Add album</button>
+</form>
+
+
+
+<p><a href="/artists/<%= @artist.id %>/edit">Edit artist</a></p>
+<p><a href="/artists">Return to artist list</a></p>
+<p><a href="/albums">Return to album list</a></p>
