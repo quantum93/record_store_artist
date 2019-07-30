@@ -47,13 +47,24 @@ class Artist
       @name = attributes.fetch(:name)
       DB.exec("UPDATE artists SET name = '#{@name}' WHERE id = #{@id};")
     end
-    album_name = attributes.fetch(:album_name)
-    if album_name != nil
+    album_name = attributes[:album_name]
+    album = DB.exec("SELECT * FROM albums WHERE lower(name)='#{album_name.downcase}';").first
+    if !album
+      Album.new({:name => album_name, :id => nil}).save()
       album = DB.exec("SELECT * FROM albums WHERE lower(name)='#{album_name.downcase}';").first
-      if album != nil
-        DB.exec("INSERT INTO albums_artists (album_id, artist_id) VALUES (#{album['id'].to_i}, #{@id});")
-      end
     end
+    DB.exec(%{
+      DO $$
+      BEGIN
+      IF NOT EXISTS
+      (SELECT * FROM albums_artists
+        WHERE album_id = #{album['id'].to_i} AND artist_id = #{@id})
+        THEN
+        INSERT INTO albums_artists (album_id, artist_id)
+        VALUES (#{album['id'].to_i}, #{@id});
+        END IF;
+        END $$;
+    })
   end
 
   def delete
@@ -79,12 +90,12 @@ class Artist
       WHERE id IN (
         SELECT album_id FROM albums_artists
         WHERE artist_id = #{@id});
-    })
-    results.map() do |result|
-      id = result.fetch("id").to_i()
-      name = result.fetch("name")
-      Album.new({:name => name, :id => id})
-    end
-  end
+        })
+        results.map() do |result|
+          id = result.fetch("id").to_i()
+          name = result.fetch("name")
+          Album.new({:name => name, :id => id})
+        end
+      end
 
-end
+    end

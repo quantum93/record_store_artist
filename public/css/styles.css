@@ -1,0 +1,48 @@
+body {
+  background-color: lightyellow;
+  color: white;
+}
+
+button {
+  color: Green;
+}
+
+h1, h2, h3 {
+  color: Green;
+  text-align: center;
+}
+
+h4, p {
+  color: Green;
+  text-align: left;
+}
+
+label {
+  color: Green;
+}
+.jumbotron {
+  /* The image used */
+  background-image: url("https://cnet4.cbsistatic.com/img/1DVBsK6VsSMJz0Btfe20ogeT-7M=/980x551/2016/07/22/c8fbed7c-2505-4cfa-9c49-43dc265924b8/hunky-dory-2449-001.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.global-background {
+  text-align: center;
+  background-color: purple;
+}
+
+.global-background img {
+  opacity: 0.5;
+  width: 100%;
+}
+
+.page-image {
+  width: 100%;
+}
