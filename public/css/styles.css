@@ -5,11 +5,13 @@ body {
 
 button {
   color: Green;
+  font-weight: bold;
 }
 
 h1, h2, h3 {
   color: Green;
   text-align: center;
+  font-weight: bold;
 }
 
 h4, p {

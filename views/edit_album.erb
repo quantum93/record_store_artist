@@ -3,15 +3,16 @@
 <form action="/albums/<%= @album.id() %>" method="post">
   <input name="_method" type="hidden" value="patch">
 
-  <label for="name">Rename album</label>
+  <!-- <label for="name">Rename album</label> -->
+  <button type="submit">Rename album</button>
   <input id="name" name="name" type="text">
 
-  <button type="submit">Update</button>
 </form>
-
+<p></p>
 <form action="/albums/<%= @album.id() %>" method="post">
   <input name="_method" type="hidden" value="delete">
 
   <button type="submit">Delete album</button>
 </form>
+<p></p>
 <p><a href="/albums">Return to album list</a></p>
